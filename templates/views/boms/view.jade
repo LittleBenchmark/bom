@@ -1,0 +1,29 @@
+extends ../../layouts/default
+
+block content
+	.container: .row: .col-sm-10.col-sm-offset-1.col-md-8.col-md-offset-2
+		article
+			p: a(href='/boms') &larr; back to the overview
+			hr
+			if !data.bom
+				h2 Invalid Bill of Material List.
+			else
+				header
+					h1= data.bom.title
+					h5 Posted 
+						if data.bom.publishedDate
+							| on #{data.bom._.publishedDate.format('MMMM Do, YYYY')} 
+						//- if data.bom.categories && data.bom.categories.length
+						//- 	| in 
+						//- 	each cat, cat_i in data.bom.categories
+						//- 		a(href='/boms/' + cat.key)= cat.name
+						//- 		if cat_i < data.bom.categories.length - 1
+						//- 			| , 
+						//- 		else
+						//- 			|  
+						if data.bom.author
+							| by #{data.bom.author.name.first}
+				.bom
+					if data.bom.image.exists
+						.image-wrap: img(src=data.bom._.image.fit(450,450)).img-responsive
+					!= data.bom.content.full

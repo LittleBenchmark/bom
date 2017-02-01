@@ -1,6 +1,6 @@
 // Simulate config options from your production environment by
 // customising the .env file in your project's root folder.
-if(process.env.LOCAL_DEV){
+if(!process.env.ENVIRONMENT || process.env.ENVIRONMENT === 'local'){
 	require('dotenv').config();
 }
 
@@ -68,8 +68,9 @@ keystone.set('email tests', require('./routes/emails'));
 
 // Configure the navigation bar in Keystone's Admin UI
 keystone.set('nav', {
-	posts: ['posts', 'post-categories'],
-	enquiries: 'enquiries',
+	// posts: ['posts', 'post-categories'],
+	// enquiries: 'enquiries',
+	"bill of materials": ['boms'],
 	users: 'users',
 });
 
