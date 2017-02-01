@@ -7,13 +7,15 @@ var Types = keystone.Field.Types;
  */
 
 var PartSubcategory = new keystone.List('PartSubcategory', {
+	label: 'Subcategories',
+	path: 'part-subcategories',
 	autokey: { from: 'name', path: 'key', unique: true },
 	track: true
 });
 
 PartSubcategory.add({
 	categories: { type: Types.Relationship, ref: 'PartCategory', initial: false, required: true, many: true },
-	name: { type: String, initial: false, required: true }
+	name: { type: String, required: true }
 });
 
 PartSubcategory.relationship({ ref: 'Part', path: 'subcategories' });

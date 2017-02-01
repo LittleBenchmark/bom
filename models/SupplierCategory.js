@@ -6,6 +6,8 @@ var keystone = require('keystone');
  */
 
 var SupplierCategory = new keystone.List('SupplierCategory', {
+	label: 'Categories',
+	path: 'supplier-categories',
 	autokey: { from: 'name', path: 'key', unique: true },
 	track: true
 });

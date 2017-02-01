@@ -6,6 +6,8 @@ var keystone = require('keystone');
  */
 
 var BOMCategory = new keystone.List('BOMCategory', {
+	label: 'Categories',
+	path: 'bom-categories',
 	autokey: { from: 'name', path: 'key', unique: true },
 	track: true
 });

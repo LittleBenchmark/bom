@@ -7,7 +7,8 @@ var Types = keystone.Field.Types;
  */
 
 var BOMPart = new keystone.List('BOMPart', {
-	label: 'bom-parts',
+	label: 'Parts',
+	path: 'bom-parts',
 	track: true,
 	map: { name: '_id' },
 	autokey: { path: 'slug', from: '_id', unique: true },

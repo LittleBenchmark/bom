@@ -98,7 +98,10 @@ keystone.set('email tests', require('./routes/emails'));
 keystone.set('nav', {
 	// posts: ['posts', 'post-categories'],
 	// enquiries: 'enquiries',
-	"bill of materials": ['boms'],
+	"bill of materials": ['boms','bom-categories', 'bom-parts'],
+	"parts": ['parts', 'part-categories', 'part-subcategories', 'part-suppliers', 'part-manufacturers', 'part-datasheets', 'part-types', 'part-mounting-types', 'part-package-types'],
+	"suppliers": ['suppliers', 'supplier-categories'],
+	"manufacturers": ['manufacturers', 'manufacturer-categories'],
 	users: 'users',
 });
 

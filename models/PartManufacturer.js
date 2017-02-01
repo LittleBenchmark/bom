@@ -7,7 +7,7 @@ var Types = keystone.Field.Types;
  */
 
 var PartManufacturer = new keystone.List('PartManufacturer', {
-	label: 'parts-manufacturers',
+	label: 'part-manufacturers',
 	track: true,
 	map: { name: '_id' },
 	autokey: { path: 'slug', from: '_id', unique: true },

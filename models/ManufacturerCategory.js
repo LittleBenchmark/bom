@@ -6,8 +6,10 @@ var keystone = require('keystone');
  */
 
 var ManufacturerCategory = new keystone.List('ManufacturerCategory', {
+	label: 'Categories',
+	path: 'manufacturer-categories',
 	autokey: { from: 'name', path: 'key', unique: true },
-	hidden: true
+	track: true
 });
 
 ManufacturerCategory.add({
