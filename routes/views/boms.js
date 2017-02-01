@@ -82,5 +82,5 @@ exports = module.exports = function (req, res) {
 	});
 
 	// Render the view
-	view.render('boms/index');
+	view.render('bom/index');
 };

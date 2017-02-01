@@ -2,14 +2,14 @@ extends ../../layouts/default
 
 mixin bom(bom)
 	.bom(data-ks-editable=editable(user, { list: 'BOM', id: bom.id }))
-		h2: a(href='/boms/bom/' + bom.slug)= bom.title
+		h2: a(href='/bom/' + bom.slug)= bom.title
 		p.lead.text-muted Bill of Materials
 			if bom.publishedDate
 				| &nbsp;on #{bom._.publishedDate.format('MMMM Do, YYYY')} 
 			if bom.categories && bom.categories.length
 				| in 
 				each cat, i in bom.categories
-					a(href='/blog/' + cat.key)= cat.name
+					a(href='/bom/' + cat.key)= cat.name
 					if i < bom.categories.length - 1
 						| , 
 					else
