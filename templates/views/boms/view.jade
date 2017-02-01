@@ -21,9 +21,9 @@ block content
 						//- 			| , 
 						//- 		else
 						//- 			|  
-						if data.bom.author
-							| by #{data.bom.author.name.first}
+						if data.bom.createdBy
+							| by #{data.bom.createdBy.name.first}
 				.bom
 					if data.bom.image.exists
 						.image-wrap: img(src=data.bom._.image.fit(450,450)).img-responsive
-					!= data.bom.content.full
+					!= data.bom.notes

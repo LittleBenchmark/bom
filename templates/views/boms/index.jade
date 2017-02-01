@@ -1,11 +1,11 @@
 extends ../../layouts/default
 
 mixin bom(bom)
-	.bom(data-ks-editable=editable(user, { list: 'Bill', id: bom.id }))
+	.bom(data-ks-editable=editable(user, { list: 'BOM', id: bom.id }))
 		h2: a(href='/boms/bom/' + bom.slug)= bom.title
 		p.lead.text-muted Bill of Materials
 			if bom.publishedDate
-				| on #{bom._.publishedDate.format('MMMM Do, YYYY')} 
+				| &nbsp;on #{bom._.publishedDate.format('MMMM Do, YYYY')} 
 			if bom.categories && bom.categories.length
 				| in 
 				each cat, i in bom.categories
@@ -14,8 +14,8 @@ mixin bom(bom)
 						| , 
 					else
 						|  
-			if bom.author
-				| by #{bom.author.name.first}
+			if bom.createdBy
+				| by #{bom.createdBy.name.first}
 		if bom.image.exists
 			img(src=bom._.image.fit(160,160)).img.pull-right
 
@@ -39,10 +39,10 @@ block content
 							strong #{data.boms.total}
 							|  boms.
 					else
-						h4.text-weight-normal Showing #{utils.plural(data.boms.results.length, '* post')}.
+						h4.text-weight-normal Showing #{utils.plural(data.boms.results.length, '* bom')}.
 					.blog
-						each post in data.boms.results
-							+post(post)
+						each bom in data.boms.results
+							+bom(bom)
 					
 					if data.boms.totalPages > 1
 						ul.pagination

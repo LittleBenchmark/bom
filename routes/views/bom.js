@@ -8,10 +8,10 @@ exports = module.exports = function (req, res) {
 	// Set locals
 	locals.section = 'bill-of-materials';
 	locals.filters = {
-		bill: req.params.bill,
+		bom: req.params.bom,
 	};
 	locals.data = {
-		bills: [],
+		boms: [],
 	};
 
 	// Load the current post
@@ -20,7 +20,7 @@ exports = module.exports = function (req, res) {
 		var q = keystone.list('BOM').model.findOne({
 			state: 'published',
 			slug: locals.filters.bom,
-		}).populate('author'); //TODO:categories
+		}).populate('createdBy'); //TODO:categories
 
 		q.exec(function (err, result) {
 			locals.data.bom = result;
@@ -32,7 +32,7 @@ exports = module.exports = function (req, res) {
 	// Load other posts
 	view.on('init', function (next) {
 
-		var q = keystone.list('BOM').model.find().where('state', 'published').sort('-publishedDate').populate('author').limit('4');
+		var q = keystone.list('BOM').model.find().where('state', 'published').sort('-publishedDate').populate('createdBy').limit('4');
 
 		q.exec(function (err, results) {
 			locals.data.boms = results;

@@ -17,7 +17,7 @@ BOM.add({
 	title: { type: String, required: true },
 	state: { type: Types.Select, options: 'draft, published, archived', default: 'draft', index: true },
 	author: { type: Types.Relationship, ref: 'User', default: '_id', hidden: true },
-	publishedDate: { type: Types.Date, index: true, dependsOn: { state: 'published' } },
+	publishedDate: { type: Types.Date, index: true, default: Date.now, dependsOn: { state: 'published' } },
 	image: { type: Types.CloudinaryImage },
 	notes: { type: Types.Html, wysiwyg: true, height: 150 },
 	// categories: { type: Types.Relationship, ref: 'BillsCategory', many: true },
@@ -27,5 +27,5 @@ BOM.add({
 // 	return this.content.extended || this.content.brief;
 // });
 
-BOM.defaultColumns = 'title, state|20%, author|20%, publishedDate|20%';
+BOM.defaultColumns = 'title, state|20%, createdBy|20%, publishedDate|20%';
 BOM.register();
