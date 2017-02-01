@@ -14,9 +14,9 @@ var PartDatasheet = new keystone.List('PartDatasheet', {
 });
 
 PartDatasheet.add({
-	url: { type: Types.Url, required: true },
+	part: { type: Types.Relationship, ref: 'Part', initial: false, required: true },
+	url: { type: Types.Url, initial: false, required: true },
 	manufacturer: { type: Types.Relationship, ref: 'Manufacturer' },
-	part: { type: Types.Relationship, ref: 'Part' },
 	state: { type: Types.Select, options: 'draft, published, archived', default: 'published', index: true, hidden: true },
 });
 

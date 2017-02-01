@@ -14,11 +14,11 @@ var PartManufacturer = new keystone.List('PartManufacturer', {
 });
 
 PartManufacturer.add({
-	number: { type: String, required: true },
-	part: { type: Types.Relationship, ref: 'Part', many: true },
-	manufacturer: { type: Types.Relationship, ref: 'Manufacturer' },
-	datasheet: { type: Types.Relationship, ref: 'PartDatasheet' },
+	number: { type: String, initial: false, required: true },
+	part: { type: Types.Relationship, ref: 'Part', initial: false, required: true, many: true },
+	manufacturer: { type: Types.Relationship, ref: 'Manufacturer', initial: false, required: true },
+	datasheet: { type: Types.Relationship, ref: 'PartDatasheet', many: true },
 });
 
-PartManufacturer.defaultColumns = 'part_no, part|20%, supplier|20%, createdBy|20%';
+PartManufacturer.defaultColumns = 'number, part|20%, manufacturer|20%, createdBy|20%';
 PartManufacturer.register();

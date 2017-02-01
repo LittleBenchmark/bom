@@ -1,4 +1,5 @@
 var keystone = require('keystone');
+var Types = keystone.Field.Types;
 
 /**
  * PartCategory Model
@@ -11,11 +12,10 @@ var PartCategory = new keystone.List('PartCategory', {
 });
 
 PartCategory.add({
-	name: { type: String, required: true },
-	subcategories: { type: Types.Relationship, ref: 'Subcategory', many: true }
+	name: { type: String, initial: false, required: true }
 });
 
 PartCategory.relationship({ ref: 'Part', path: 'categories' });
-PartSubcategory.relationship({ ref: 'PartSubcategory', path: 'category' });
+PartCategory.relationship({ ref: 'PartSubcategory', path: 'categories' });
 
 PartCategory.register();

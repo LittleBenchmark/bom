@@ -14,11 +14,12 @@ var PartSupplier = new keystone.List('PartSupplier', {
 });
 
 PartSupplier.add({
+	number: { type: String, initial: false, required: true },
 	url: { type: String },
-	part_no: { type: String, required: true },
-	part: { type: Types.Relationship, ref: 'Part', many: true },
-	supplier: { type: Types.Relationship, ref: 'Supplier' },
+	part: { type: Types.Relationship, ref: 'Part', initial: false, required: true, many: true },
+	supplier: { type: Types.Relationship, ref: 'Supplier', initial: false, required: true },
+	state: { type: Types.Select, options: 'draft, published, archived', default: 'published', index: true, hidden: true }
 });
 
-PartSupplier.defaultColumns = 'part_no, part|20%, supplier|20%, createdBy|20%';
+PartSupplier.defaultColumns = 'number, part|20%, supplier|20%, createdBy|20%';
 PartSupplier.register();

@@ -14,9 +14,9 @@ var BOMPart = new keystone.List('BOMPart', {
 });
 
 BOMPart.add({
-	item_no: { type: String },
+	number: { type: String },
 	designator: { type: String },
-	part: { type: Types.Relationship, ref: 'Part', required: true },
+	part: { type: Types.Relationship, ref: 'Part', initial: false, required: true },
 	description: { type: Types.Html, wysiwyg: false, height: 50 },
 	quantity: { type: Types.Number },
 	image: { type: Types.CloudinaryImage, hidden: true },
@@ -25,5 +25,5 @@ BOMPart.add({
 	categories: { type: Types.Relationship, ref: 'PartCategory', many: true },
 });
 
-BOMPart.defaultColumns = 'title, item_no|20%, createdBy|20%, state|20%';
+BOMPart.defaultColumns = 'title, number|20%, createdBy|20%, state|20%';
 BOMPart.register();
