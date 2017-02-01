@@ -17,7 +17,7 @@ var BOMPart = new keystone.List('BOMPart', {
 BOMPart.add({
 	number: { type: String },
 	designator: { type: String },
-	part: { type: Types.Relationship, ref: 'Part', initial: false, required: true },
+	part: { type: Types.Relationship, ref: 'Part', initial: true, required: true },
 	description: { type: Types.Html, wysiwyg: false, height: 50 },
 	quantity: { type: Types.Number },
 	image: { type: Types.CloudinaryImage, hidden: true },

@@ -15,7 +15,7 @@ var BOM = new keystone.List('BOM', {
 
 BOM.add({
 	title: { type: String, required: true },
-	part: { type: Types.Relationship, ref: 'BomPart', required: true, initial: false, many: true },
+	part: { type: Types.Relationship, ref: 'BomPart', required: true, initial: true, many: true },
 	description: { type: Types.Html, wysiwyg: false, height: 50 },
 	image: { type: Types.CloudinaryImage },
 	author: { type: Types.Relationship, ref: 'User', default: '_id', hidden: true },

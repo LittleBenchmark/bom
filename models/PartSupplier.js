@@ -15,10 +15,10 @@ var PartSupplier = new keystone.List('PartSupplier', {
 });
 
 PartSupplier.add({
-	number: { type: String, initial: false, required: true },
+	number: { type: String, initial: true, required: true },
 	url: { type: String },
-	part: { type: Types.Relationship, ref: 'Part', initial: false, required: true, many: true },
-	supplier: { type: Types.Relationship, ref: 'Supplier', initial: false, required: true },
+	part: { type: Types.Relationship, ref: 'Part', initial: true, required: true, many: true },
+	supplier: { type: Types.Relationship, ref: 'Supplier', initial: true, required: true },
 	state: { type: Types.Select, options: 'draft, published, archived', default: 'published', index: true, hidden: true }
 });
 

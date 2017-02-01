@@ -14,7 +14,7 @@ var PartSubcategory = new keystone.List('PartSubcategory', {
 });
 
 PartSubcategory.add({
-	categories: { type: Types.Relationship, ref: 'PartCategory', initial: false, required: true, many: true },
+	categories: { type: Types.Relationship, ref: 'PartCategory', initial: true, required: true, many: true },
 	name: { type: String, required: true }
 });
 

@@ -15,9 +15,9 @@ var PartManufacturer = new keystone.List('PartManufacturer', {
 });
 
 PartManufacturer.add({
-	number: { type: String, initial: false, required: true },
-	part: { type: Types.Relationship, ref: 'Part', initial: false, required: true, many: true },
-	manufacturer: { type: Types.Relationship, ref: 'Manufacturer', initial: false, required: true },
+	number: { type: String, initial: true, required: true },
+	part: { type: Types.Relationship, ref: 'Part', initial: true, required: true, many: true },
+	manufacturer: { type: Types.Relationship, ref: 'Manufacturer', initial: true, required: true },
 	datasheet: { type: Types.Relationship, ref: 'PartDatasheet', many: true },
 });
 

@@ -15,6 +15,14 @@ var pkg = require('./package.json');
 // See http://keystonejs.com/guide/config for available options
 // and documentation.
 
+var mongo_url = process.env.MONGO_URI;
+
+if (process.env.ENVIRONMENT === 'local' && process.env.USE_LIVE_DB === 'true') {
+	mongo_url = process.env.MONGO_URI;
+} else {
+	mongo_url = 'mongodb://localhost/' + pkg.name;
+}
+
 keystone.init({
 	'name': 'Bill of Materials by Little Benchmark',
 	'brand': 'Little Benchmark',
@@ -29,7 +37,7 @@ keystone.init({
 
 	'auto update': true,
 
-	'mongo': process.env.MONGO_URI || 'mongodb://localhost/' + pkg.name,
+	'mongo': mongo_url,
 
 	'session': true,
 	'session store': 'mongo',
