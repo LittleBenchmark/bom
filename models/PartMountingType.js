@@ -7,7 +7,8 @@ var Types = keystone.Field.Types;
  */
 
 var PartMountingType = new keystone.List('PartMountingType', {
-	label: 'part-mounting-types',
+	label: 'Mounting Types',
+	path: 'part-mounting-types',
 	track: true,
 	map: { name: '_id' },
 	autokey: { path: 'slug', from: '_id', unique: true },

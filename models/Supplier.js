@@ -7,7 +7,8 @@ var Types = keystone.Field.Types;
  */
 
 var Supplier = new keystone.List('Supplier', {
-	label: 'suppliers',
+	label: 'Suppliers',
+	path: 'suppliers',
 	track: true,
 	map: { name: 'title' },
 	autokey: { path: 'slug', from: 'title', unique: true },
