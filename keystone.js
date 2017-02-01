@@ -1,19 +1,23 @@
 // Simulate config options from your production environment by
 // customising the .env file in your project's root folder.
-if(!process.env.ENVIRONMENT || process.env.ENVIRONMENT === 'local'){
-	require('dotenv').config();
+require('dotenv').config({ silent: true });
+
+// Initialise New Relic if an app name and license key exists
+if (process.env.NEW_RELIC_APP_NAME && process.env.NEW_RELIC_LICENSE_KEY) {
+	require('newrelic');
 }
 
 // Require keystone
 var keystone = require('keystone');
+var pkg = require('./package.json');
 
 // Initialise Keystone with your project's configuration.
 // See http://keystonejs.com/guide/config for available options
 // and documentation.
 
 keystone.init({
-	'name': 'Little Benchmark BOM',
-	'brand': 'Little Benchmark BOM',
+	'name': 'Bill of Materials by Little Benchmark',
+	'brand': 'Little Benchmark',
 
 	'less': 'public',
 	'static': 'public',
@@ -24,9 +28,33 @@ keystone.init({
 	'emails': 'templates/emails',
 
 	'auto update': true,
+
+	'mongo': process.env.MONGO_URI || 'mongodb://localhost/' + pkg.name,
+
 	'session': true,
+	'session store': 'mongo',
 	'auth': true,
 	'user model': 'User',
+	'cookie secret': process.env.COOKIE_SECRET || 'littlebenchmark',
+
+	'mandrill username': process.env.MANDRILL_USERNAME,
+	'mandrill api key': process.env.MANDRILL_KEY,
+
+	'google api key': process.env.GOOGLE_BROWSER_KEY,
+	'google server api key': process.env.GOOGLE_SERVER_KEY,
+
+	'ga property': process.env.GA_PROPERTY,
+	'ga domain': process.env.GA_DOMAIN,
+
+	'signin logo': ['/images/logo_signin.svg', 120],
+
+	's3 config': {
+		bucket: process.env.AMAZON_BUCKET,
+		key: process.env.AMAZON_KEY,
+		secret: process.env.AMAZON_SECRET
+	},
+
+	'embedly api key': process.env.EMBEDLY_API_KEY
 });
 
 // Load your project's Models
@@ -73,13 +101,6 @@ keystone.set('nav', {
 	"bill of materials": ['boms'],
 	users: 'users',
 });
-
-keystone.set('s3 config', { bucket: process.env.AMAZON_BUCKET, key: process.env.AMAZON_KEY, secret: process.env.AMAZON_SECRET });
-
-keystone.set('embedly api key', process.env.EMBEDLY_API_KEY);
-
-keystone.set('mandrill api key', process.env.MANDRILL_API_KEY);
-keystone.set('mandrill username', process.env.MANDRILL_USERNAME);
 
 // Start Keystone to connect to your database and initialise the web server
 
