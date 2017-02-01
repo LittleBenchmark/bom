@@ -1,6 +1,8 @@
 // Simulate config options from your production environment by
 // customising the .env file in your project's root folder.
-require('dotenv').config();
+if(process.env.LOCAL_DEV){
+	require('dotenv').config();
+}
 
 // Require keystone
 var keystone = require('keystone');
@@ -72,6 +74,11 @@ keystone.set('nav', {
 });
 
 keystone.set('s3 config', { bucket: process.env.AMAZON_BUCKET, key: process.env.AMAZON_KEY, secret: process.env.AMAZON_SECRET });
+
+keystone.set('embedly api key', process.env.EMBEDLY_API_KEY);
+
+keystone.set('mandrill api key', process.env.MANDRILL_API_KEY);
+keystone.set('mandrill username', process.env.MANDRILL_USERNAME);
 
 // Start Keystone to connect to your database and initialise the web server
 
