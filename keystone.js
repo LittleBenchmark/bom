@@ -71,6 +71,8 @@ keystone.set('nav', {
 	users: 'users',
 });
 
+keystone.set('s3 config', { bucket: process.env.AMAZON_BUCKET, key: process.env.AMAZON_KEY, secret: process.env.AMAZON_SECRET });
+
 // Start Keystone to connect to your database and initialise the web server
 
 keystone.start();
