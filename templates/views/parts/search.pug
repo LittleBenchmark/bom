@@ -14,39 +14,14 @@ block content
 		else
 			.container
 				.row
-					.col-md-12
-						p Search for a part below.
-				.row
-					.col-md-12
-						#adv-search.input-group
-							input.form-control(type='text', placeholder='Search for parts')
-							.input-group-btn
-								.btn-group(role='group')
-									.dropdown.dropdown-lg
-										button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown', aria-expanded='false')
-											span.caret
-										.dropdown-menu.dropdown-menu-right(role='menu')
-											form.form-horizontal(role='form')
-												.form-group
-													label(for='filter') Filter by
-													|
-													select.form-control
-														option(value='0', selected='') All Snippets
-														option(value='1') Featured
-														option(value='2') Most popular
-														option(value='3') Top rated
-														option(value='4') Most commented
-												.form-group
-													label(for='contain') Author
-													|
-													input.form-control(type='text')
-												.form-group
-													label(for='contain') Contains the words
-													|
-													input.form-control(type='text')
-												|
-												button.btn.btn-primary(type='submit')
-													span.glyphicon.glyphicon-search(aria-hidden='true')
+					.col-sm-6.col-sm-offset-3
+						#imaginary_container
+							form.contact-form(method="post")
+								input(type='hidden', name='action', value='part.search')
+								.input-group.stylish-input-group
+									input.form-control(type='text', name='query', placeholder='Search by part number or keyword', aria-describedby='search')
 									|
-									button.btn.btn-primary(type='button')
-										span.glyphicon.glyphicon-search(aria-hidden='true')
+									span.input-group-addon
+										button(type='submit')
+											span.glyphicon.glyphicon-search
+								small#searchHelp.form-text.text-muted Try something like <strong>MSP430</strong>

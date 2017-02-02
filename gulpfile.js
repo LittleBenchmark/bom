@@ -33,7 +33,7 @@ gulp.task('runKeystone', shell.task('node keystone.js'));
 
 // Watches for changed files
 gulp.task('watch', function () {
-	gulp.watch('./public/styles/*.less', ['less']);
+	gulp.watch('./public/styles/**/*.less', ['less']);
 });
 
 // Runs LESS compiling routines on stylesheets

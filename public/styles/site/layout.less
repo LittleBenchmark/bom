@@ -28,26 +28,26 @@
 }
 
 .page-intro {
-  padding-bottom: @page-padding;
-  text-align: center;
-  h1 {
-    margin-bottom: 0.25em;
-  }
-  .buttons > .btn {
-    margin-right: 10px;
-  }
-  .lead {
-    max-width: @screen-sm-min - @grid-gutter-width;
-    margin-left: auto;
-    margin-right: auto;
-  }
+	padding-bottom: @page-padding;
+	text-align: center;
+	h1 {
+		margin-bottom: 0.25em;
+	}
+	.buttons > .btn {
+		margin-right: 10px;
+	}
+	.lead {
+		max-width: @screen-sm-min - @grid-gutter-width;
+		margin-left: auto;
+		margin-right: auto;
+	}
 }
 
 .tile {
-  .tile-base();
-  padding: 1em;
-  position: relative;
-  z-index: 2;
+	.tile-base();
+	padding: 1em;
+	position: relative;
+	z-index: 2;
 }
 
 
@@ -57,29 +57,29 @@
 // base field
 
 .form-control {
-  font-size: inherit;
-  height: auto;
-  -webkit-appearance: none;
+	font-size: inherit;
+	height: auto;
+	-webkit-appearance: none;
 }
 
 // use as an alternative to ".row" for form columns to avoid the _huge_ gap
 
 .form-row {
-  .make-row(10px);
+	.make-row(10px);
 
-  /// whilst this selector performs poorly it's not a big deal in small apps
-  [class^="col-"] {
-    padding-left: 5px;
-    padding-right: 5px;
-  }
+	/// whilst this selector performs poorly it's not a big deal in small apps
+	[class^="col-"] {
+		padding-left: 5px;
+		padding-right: 5px;
+	}
 
-  @media (max-width: @screen-xs-max) {
-    [class^="col-sm"] + [class^="col-sm"],
-    [class^="col-md"] + [class^="col-md"],
-    [class^="col-lg"] + [class^="col-lg"] {
-      margin-top: 10px;
-    }
-  }
+	@media (max-width: @screen-xs-max) {
+		[class^="col-sm"] + [class^="col-sm"],
+		[class^="col-md"] + [class^="col-md"],
+		[class^="col-lg"] + [class^="col-lg"] {
+			margin-top: 10px;
+		}
+	}
 }
 
 // UI Reveal
@@ -87,19 +87,19 @@
 
 // show hidden UI
 .ui-reveal {
-  &.is-revealed {
-    .ui-reveal__hidden {
-      display: block;
-    }
-    .ui-reveal__initial {
-      display: none;
-    }
-  }
+	&.is-revealed {
+		.ui-reveal__hidden {
+			display: block;
+		}
+		.ui-reveal__initial {
+			display: none;
+		}
+	}
 }
 
 // hide by default
 .ui-reveal__hidden {
-  display: none;
+	display: none;
 }
 
 #footer {
@@ -110,7 +110,7 @@
 }
 
 .gallery-image img {
-    display: block;
-    max-width: 100%;
-    height: auto;
+		display: block;
+		max-width: 100%;
+		height: auto;
 }

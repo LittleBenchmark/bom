@@ -21,7 +21,7 @@ exports = module.exports = function (req, res) {
 
 	view.on('init', function (next) {
 
-		console.log('HERE');
+		console.log('HERE VIEW');
 		// var q = keystone.list('BOMPart').model.findOne({
 		// 	state: 'published',
 		// 	slug: locals.filters.part,
@@ -35,14 +35,16 @@ exports = module.exports = function (req, res) {
 	});
 
 	view.on('post', { action: 'part.search' }, function(next){
-		console.log('HERE POST');
 
-		console.log(locals.formData);
+		console.log('HERE POST');
+		console.log(locals.formData.query);
 
 		var url = 'http://octopart.com/api/v3/parts/match?';
-				url += '&queries=[{"mpn":"SN74S74N"}]';
-				url += '&apikey=' + opApiKey;
+				url += '&queries=[{"mpn":'+locals.formData.query+'}]';
+				url += '&apikey=' + locals.opApiKey;
 				url += '&callback=?';
+		
+
 
 		next();
 	});
