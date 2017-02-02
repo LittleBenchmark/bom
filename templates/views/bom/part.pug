@@ -10,17 +10,17 @@ block content
 			else
 				header
 					h1= data.bom.title
-					h5 Posted 
+					h5 Posted
 						if data.bom.publishedDate
-							| on #{data.bom._.publishedDate.format('MMMM Do, YYYY')} 
-						//- if data.bom.categories && data.bom.categories.length
-						//- 	| in 
-						//- 	each cat, cat_i in data.bom.categories
-						//- 		a(href='/boms/' + cat.key)= cat.name
-						//- 		if cat_i < data.bom.categories.length - 1
-						//- 			| , 
-						//- 		else
-						//- 			|  
+							| on #{data.bom._.publishedDate.format('MMMM Do, YYYY')}
+						if data.bom.categories && data.bom.categories.length
+							| in
+							each cat, cat_i in data.bom.categories
+								a(href='/bom/' + cat.key)= cat.name
+								if cat_i < data.bom.categories.length - 1
+									| ,
+								else
+									|
 						if data.bom.createdBy
 							| by #{data.bom.createdBy.name.first}
 				.bom

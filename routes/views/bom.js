@@ -20,7 +20,7 @@ exports = module.exports = function (req, res) {
 		var q = keystone.list('BOM').model.findOne({
 			state: 'published',
 			slug: locals.filters.bom,
-		}).populate('createdBy'); //TODO:categories
+		}).populate('createdBy', 'categories');
 
 		q.exec(function (err, result) {
 			locals.data.bom = result;

@@ -28,7 +28,7 @@ keystone.pre('routes', function (req, res, next) {
 
 	res.locals.navLinks = [
 		{ label: 'Home', key: 'home', href: '/' },
-		{ label: 'Bill of Materials', key: 'bill-of-materials', href: '/boms' },
+		{ label: 'Bill of Materials', key: 'bill-of-materials', href: '/bom' },
 		// { label: 'Blog', key: 'blog', href: '/blog' },
 		// { label: 'Contact', key: 'contact', href: '/contact' },
 	];
