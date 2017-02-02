@@ -132,9 +132,14 @@ html
 			script(src='/keystone/js/content/editor.js')
 
 		//- Add scripts that are globally required by your site here.
+
+		// Used for Octopart API
+		// See https://octopart.com/api/docs/v3/overview
+		script(src='//ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js')
+		
+		// Assists with user auth routines
 		script(src='/js/ui.js')
 		script(async='', defer='', src='https://buttons.github.io/buttons.js')
-
 
 		//- Include template-specific javascript files by extending the js block
 		block js

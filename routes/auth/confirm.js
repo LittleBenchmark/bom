@@ -7,7 +7,8 @@ var keystone = require('keystone'),
 exports = module.exports = function(req, res) {
 
 	var view = new keystone.View(req, res),
-			locals = res.locals;
+			locals = res.locals,
+			userData = {};
 
 	locals.section = 'profile';
 	locals.form = req.body;
@@ -115,7 +116,7 @@ exports = module.exports = function(req, res) {
 					console.log('[auth.confirm] - Existing user found, updating...');
 					console.log('------------------------------------------------------------');
 
-					var userData = {
+					userData = {
 						state: 'enabled',
 
 						website: locals.form.website,
@@ -155,7 +156,7 @@ exports = module.exports = function(req, res) {
 					console.log('[auth.confirm] - Creating new user...');
 					console.log('------------------------------------------------------------');
 
-					var userData = {
+					userData = {
 						name: {
 							first: locals.form['name.first'],
 							last: locals.form['name.last']
