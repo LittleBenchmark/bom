@@ -29,13 +29,22 @@ keystone.init({
 	'name': 'Bill of Materials by Little Benchmark',
 	'brand': 'Little Benchmark',
 
+	'favicon': 'public/favicon.ico',
+
 	'less': 'public',
 	'static': 'public',
-	'favicon': 'public/favicon.ico',
+
+	'admin path': 'admin',
+
 	'views': 'templates/views',
-	'view engine': 'jade',
+	'view engine': 'pug',
 
 	'emails': 'templates/emails',
+	'email transport': 'mailgun',
+	'contactEmailAddress': 'team@littlebenchmark.com',
+
+	// 'mandrill username': process.env.MANDRILL_USERNAME,
+	// 'mandrill api key': process.env.MANDRILL_KEY,
 
 	'auto update': true,
 
@@ -47,14 +56,13 @@ keystone.init({
 	'user model': 'User',
 	'cookie secret': process.env.COOKIE_SECRET || 'littlebenchmark',
 
-	'mandrill username': process.env.MANDRILL_USERNAME,
-	'mandrill api key': process.env.MANDRILL_KEY,
-
 	'google api key': process.env.GOOGLE_BROWSER_KEY,
 	'google server api key': process.env.GOOGLE_SERVER_KEY,
 
 	'ga property': process.env.GA_PROPERTY,
 	'ga domain': process.env.GA_DOMAIN,
+
+	'cloudinary config': process.env.CLOUDINARY_URL,
 
 	'signin logo': ['/images/logo_signin.svg', 120],
 
@@ -64,7 +72,10 @@ keystone.init({
 		secret: process.env.AMAZON_SECRET
 	},
 
-	'embedly api key': process.env.EMBEDLY_API_KEY
+	'embedly api key': process.env.EMBEDLY_API_KEY,
+
+	'chartbeat property': process.env.CHARTBEAT_PROPERTY,
+	'chartbeat domain': process.env.CHARTBEAT_DOMAIN
 });
 
 // Load your project's Models
