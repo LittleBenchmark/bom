@@ -25,8 +25,12 @@ var importRoutes = keystone.importer(__dirname);
 // Common Middleware
 keystone.pre('routes', function (req, res, next) {
 	res.locals.siteName = keystone.get('name');
+
 	res.locals.navLinks = [
-		{ label: 'Home', key: 'home', href: '/' }
+		{ label: 'Home', key: 'home', href: '/' },
+		{ label: 'Bill of Materials', key: 'bill-of-materials', href: '/boms' },
+		// { label: 'Blog', key: 'blog', href: '/blog' },
+		// { label: 'Contact', key: 'contact', href: '/contact' },
 	];
 	res.locals.user = req.user;
 	next();

@@ -1,16 +1,22 @@
 include ../mixins/flash-messages
+include ../mixins/auth/auth-forms
 
 doctype html
 html
 
 	//- HTML HEADER
 	head
+		if env === 'production'
+			script.
+				var _sf_startpt=(new Date()).getTime()
+
 		meta(charset="utf-8")
 		meta(name="viewport", content="width=device-width, initial-scale=1.0")
 		meta(http-equiv="X-UA-Compatible" content="IE=edge")
 
-		title= title || 'Open Hardware Bill of Materials by Little Benchmark'
+		title= title || 'Little B.O.M for Open Hardware'
 		link(rel="shortcut icon", href="/favicon.ico", type="image/x-icon")
+		link(href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600,700', rel='stylesheet')
 
 		//- Customise the stylesheet for your site by editing /public/styles/site.less
 		//- All .less files will be automatically compiled and minified in production.
@@ -42,15 +48,15 @@ html
 			//- Customise your site's navigation by changing the navLinks Array in ./routes/middleware.js
 			//- ... or completely change this header to suit your design.
 
-			div(role="navigation").navbar.navbar-default
-				.container-fluid
+			div(role="navigation").navbar.navbar-default.navbar-fixed-top
+				.container
 					.navbar-header
 						button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
 							span.sr-only Toggle navigation
 							span.icon-bar
 							span.icon-bar
 							span.icon-bar
-						a.navbar-brand(href='/') 
+						a.navbar-brand(href='/')
 							img.logo(src='/images/oshw-logo-100-px-title.png', alt='OSHWA', width='100')
 					.collapse.navbar-collapse
 						ul.nav.navbar-nav.navbar-left
@@ -58,11 +64,13 @@ html
 								li(class=(section == link.key ? 'active' : null)): a(href=link.href)= link.label
 						ul.nav.navbar-nav.navbar-right
 							if user
+								li: a(href='/profile') #{user.name.full}
 								if user.canAccessKeystone
-									li: a(href='/keystone') Dashboard
-								li: a(href='/keystone/signout') Sign Out
+									li: a(href='/admin') Admin UI
+								li: a(href='/signout') Sign Out
 							else
-								li: a(href='/keystone/signin') Sign In
+								li: a(href='/signin', data-from=page.path, data-initial='signin').js-auth-trigger Sign in
+								li: a(href='/join', data-from=page.path).js-auth-trigger Join
 
 		//- BODY
 		#body
@@ -81,12 +89,22 @@ html
 			//- The content block should contain the body of your template's content
 			block content
 
+			block modal
+				if !user
+					#modal-auth(tabindex="-1", role="dialog", aria-labelledby="signin", aria-hidden="true").modal.fade
+						.modal-dialog
+							.modal-content
+								+auth-forms({modal: true, initial: 'signin'})
+
+				script.
+					!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+
 
 		//- FOOTER
 		.container: #footer
 
 			//- You don't _have_ to include a link saying your site is powered by KeystoneJS, but we appreciate it!
-			p 
+			p
 				img(style='border-width: 0', src='http://i.creativecommons.org/l/by-sa/4.0/88x31.png', alt='Creative Commons License', scale='0')
 			p This work is licensed under a <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.en_US" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License.</a> Powered by <a href="http://keystonejs.com" target="_blank">KeystoneJS</a>.
 
@@ -102,12 +120,21 @@ html
 		//- them specifically here, instead of bootstrap-3.3.5.min.js
 		script(src='/js/bootstrap/bootstrap-3.3.5.min.js')
 
+		script(src='/js/bootstrap/collapse.js')
+		script(src='/js/bootstrap/dropdown.js')
+		script(src='/js/bootstrap/modal.js')
+		script.
+			$('body')[0].style.paddingTop = $('.navbar').height() + 30 + 'px';
+
 		//- The KeystoneJS Content Editor provides support for ks-editable data attributes,
 		//- which generate links to edit content for users who can access Keystone
 		if user && user.canAccessKeystone
 			script(src='/keystone/js/content/editor.js')
 
 		//- Add scripts that are globally required by your site here.
+		script(src='/js/ui.js')
+		script(async='', defer='', src='https://buttons.github.io/buttons.js')
+
 
 		//- Include template-specific javascript files by extending the js block
 		block js

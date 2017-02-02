@@ -7,7 +7,7 @@ block content
 		.page-content
 			+auth-forms({ modal: false, initial: 'join' })
 
-block page-js
+block js
 	script.
 		jQuery(function($) {
 			$('.auth-form').find('.form-control').eq(0).focus().select();

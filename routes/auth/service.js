@@ -3,9 +3,7 @@ var keystone = require('keystone'),
 
 var services = {
 	github: require('../../lib/auth/github'),
-	google: require('../../lib/auth/google'),
-	// facebook: require('../../lib/auth/facebook'),
-	// twitter: require('../../lib/auth/twitter')
+	google: require('../../lib/auth/google')
 };
 
 exports = module.exports = function(req, res, next) {
