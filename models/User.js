@@ -9,10 +9,26 @@ var User = new keystone.List('User');
 
 User.add({
 	name: { type: Types.Name, required: true, index: true },
+	group: { type: Types.Select, options: 'user, editor, admin', default: 'user' },
 	email: { type: Types.Email, initial: true, required: true, index: true },
 	password: { type: Types.Password, initial: true, required: true },
-}, 'Permissions', {
-	isAdmin: { type: Boolean, label: 'Can access Keystone', index: true }
+},
+'Permissions', {
+	isAdmin: {
+		type: Boolean,
+		label: 'Admins',
+		index: true
+	},
+	isUser: {
+		type: Boolean,
+		label: 'Public Users',
+		index: true
+	},
+	isEditor: {
+		type: Boolean,
+		label: 'Public Editors',
+		index: true
+	}
 });
 
 // Provide access to Keystone

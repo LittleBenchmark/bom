@@ -14,10 +14,13 @@ var PartSubcategory = new keystone.List('PartSubcategory', {
 });
 
 PartSubcategory.add({
-	categories: { type: Types.Relationship, ref: 'PartCategory', initial: true, required: true, many: true },
-	name: { type: String, required: true }
+	name: { type: String, required: true },
+	categories: {type: Types.Relationship, ref: 'PartCategory', many: true }
 });
 
 PartSubcategory.relationship({ ref: 'Part', path: 'subcategories' });
+PartSubcategory.relationship({ ref: 'PartCategory', path: 'subcategories' });
+
+PartSubcategory.defaultColumns = 'categories, name|20%, createdBy|20%';
 
 PartSubcategory.register();
