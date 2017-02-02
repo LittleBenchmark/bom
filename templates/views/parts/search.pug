@@ -12,45 +12,41 @@ block content
 		if results
 			p Show the results now.
 		else
-			p Search for a part below.
-
-			form.search-form(method="post").row.col-sm-8.col-md-6
-				input(type='hidden', name='action', value='part.search')
-				.container
-					.row
-						.col-md-12
-							#adv-search.input-group
-								input.form-control(type='text', placeholder='Search for parts')
-								.input-group-btn
-									.btn-group(role='group')
-										.dropdown.dropdown-lg
-											button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown', aria-expanded='false')
-												span.caret
-											.dropdown-menu.dropdown-menu-right(role='menu')
-												form.form-horizontal(role='form')
-													.form-group
-														label(for='filter') Filter by
-														|
-														select.form-control
-															option(value='0', selected='') All Snippets
-															option(value='1') Featured
-															option(value='2') Most popular
-															option(value='3') Top rated
-															option(value='4') Most commented
-													.form-group
-														label(for='contain') Author
-														|
-														input.form-control(type='text')
-													.form-group
-														label(for='contain') Contains the words
-														|
-														input.form-control(type='text')
+			.container
+				.row
+					.col-md-12
+						p Search for a part below.
+				.row
+					.col-md-12
+						#adv-search.input-group
+							input.form-control(type='text', placeholder='Search for parts')
+							.input-group-btn
+								.btn-group(role='group')
+									.dropdown.dropdown-lg
+										button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown', aria-expanded='false')
+											span.caret
+										.dropdown-menu.dropdown-menu-right(role='menu')
+											form.form-horizontal(role='form')
+												.form-group
+													label(for='filter') Filter by
 													|
-													button.btn.btn-primary(type='submit')
-														span.glyphicon.glyphicon-search(aria-hidden='true')
-										|
-										button.btn.btn-primary(type='button')
-											span.glyphicon.glyphicon-search(aria-hidden='true')
-
-
-				button(type='submit').btn.btn-success Search
+													select.form-control
+														option(value='0', selected='') All Snippets
+														option(value='1') Featured
+														option(value='2') Most popular
+														option(value='3') Top rated
+														option(value='4') Most commented
+												.form-group
+													label(for='contain') Author
+													|
+													input.form-control(type='text')
+												.form-group
+													label(for='contain') Contains the words
+													|
+													input.form-control(type='text')
+												|
+												button.btn.btn-primary(type='submit')
+													span.glyphicon.glyphicon-search(aria-hidden='true')
+									|
+									button.btn.btn-primary(type='button')
+										span.glyphicon.glyphicon-search(aria-hidden='true')

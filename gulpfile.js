@@ -7,7 +7,8 @@ var gulp = require('gulp'),
 		plumber = require('gulp-plumber'),
 		cssmin = require('gulp-cssmin'),
 		ignore = require('gulp-ignore'),
-		rename = require('gulp-rename');
+		rename = require('gulp-rename'),
+		cleanCSS = require('gulp-clean-css');
 
 var paths = {
 	'src':['./models/**/*.js','./routes/**/*.js', 'keystone.js', 'package.json']
@@ -20,26 +21,29 @@ gulp.task('views', function buildHTML() {
 	}));
 });
 
+//Handles cleaning leftover css files
+// gulp.task('clean-css', function () {
+// 	return gulp.src('./public/styles/*.css')
+// 		.pipe(cleanCSS({compatibility: 'ie8'}))
+// 		.pipe(gulp.dest('./public/styles'));
+// });
+
+// Handles starting up KeystoneJS
 gulp.task('runKeystone', shell.task('node keystone.js'));
+
+// Watches for changed files
 gulp.task('watch', function () {
 	gulp.watch('./public/styles/*.less', ['less']);
 });
 
+// Runs LESS compiling routines on stylesheets
 gulp.task('less', function () {
-
-	var bootstrap_dir = '';
 	gulp.src([
-			'!public/styles/bootstrap/**',
-			'!public/styles/themes/**',
-			'!public/styles/site.less',
-			'!public/styles/components/buttons.less',
-			'!public/styles/site/entypo.less',
-			'!public/styles/site/mixins.less',
-			'!public/styles/site/layout.less',
-			'!public/styles/site/session.less',
-			'!public/styles/site/variables.less',
-			'public/styles/components/*.less',
-			'public/styles/site/*.less'
+			'./public/styles/components/*.less',
+			'./public/styles/site.less',
+			'!./public/styles/bootstrap/**',
+			'!./public/styles/themes/**',
+			'!./public/styles/components/buttons.less'
 		])
 		.pipe(plumber())
 		.pipe(less())
@@ -48,9 +52,8 @@ gulp.task('less', function () {
 		.pipe(rename({
 			suffix: '.min'
 		}))
-		.pipe(plumber.stop())
 		.pipe(gulp.dest('./public/styles/'));
 });
 
-
+// What should happen when you run `gulp` in cli
 gulp.task('default', ['less', 'runKeystone', 'watch']);
