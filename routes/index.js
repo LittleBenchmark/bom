@@ -35,8 +35,10 @@ var routes = {
 exports = module.exports = function (app) {
 	// Views
 	app.get('/', routes.views.index);
-	//
+	// User registration
 	app.get('/signup', routes.views.signup);
+	app.post('/signup', routes.views.signup);
+	//
 	app.get('/dashboard', routes.views.userDashboard);
 	//
 	app.get('/blog/:category?', routes.views.blog);
