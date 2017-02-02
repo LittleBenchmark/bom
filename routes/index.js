@@ -23,12 +23,25 @@ var middleware = require('./middleware');
 var importRoutes = keystone.importer(__dirname);
 
 // Common Middleware
+keystone.pre('routes', function (req, res, next) {
+	res.locals.siteName = keystone.get('name');
+	res.locals.navLinks = [
+		{ label: 'Home', key: 'home', href: '/' }
+	];
+	res.locals.user = req.user;
+	next();
+});
 keystone.pre('routes', middleware.initLocals);
 keystone.pre('render', middleware.flashMessages);
 
+keystone.set('404', function (req, res, next) {
+	res.status(404).render('errors/404');
+});
+
 // Import Route Controllers
 var routes = {
-	views: importRoutes('./views')
+	views: importRoutes('./views'),
+	auth: importRoutes('./auth')
 };
 
 // Setup Route Bindings
