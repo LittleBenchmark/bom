@@ -1,0 +1,22 @@
+[
+  {
+      "__ref": "admin_user",
+      "name": {
+        "first": "Admin",
+        "last": "User"
+      },
+      "email": "admin@littlebenchmark.com",
+      "password": "admin",
+      "isAdmin": "true"
+  },
+  {
+    "__ref": "johndoe",
+    "name" : {
+      "first" : "John",
+      "last" : "Doe"
+    },
+    "email" : "team@littlebenchmark.com",
+    "password" : "password",
+    "isAdmin": "false"
+  }
+]

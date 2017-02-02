@@ -1,0 +1,25 @@
+[
+  {
+    "__ref": "welcome_post",
+    "name": "Welcome to my Blog",
+    "state": "published",
+    "author": "admin_user",
+    "publishedDate": "2016-12-08T00:00:00.000Z",
+    "image" : {
+      "public_id" : "cprcc6tteieeoailljqb",
+      "version" : 1481187365,
+      "signature" : "c6c914f4f9d8eeeef0fff86f7948f662b514f3d4",
+      "width" : 1024,
+      "height" : 768,
+      "format" : "jpg",
+      "resource_type" : "image",
+      "url" : "http://res.cloudinary.com/locally-ie/image/upload/v1481187365/cprcc6tteieeoailljqb.jpg",
+      "secure_url" : "https://res.cloudinary.com/locally-ie/image/upload/v1481187365/cprcc6tteieeoailljqb.jpg"
+    },
+    "content": {
+      "brief": "This is some <u>short</u> content for the welcome post.",
+      "extended": "This is the <b>longer</b> content for the welcome post. We hope you enjoyed reading it."
+    },
+    "categories": []
+  }
+]

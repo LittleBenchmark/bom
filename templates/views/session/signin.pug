@@ -1,0 +1,14 @@
+extends ../../layouts/default
+
+block content
+	.container-xs
+		.page-intro
+			h1 Sign in to #{siteName}
+		.page-content
+			+auth-forms({ modal: false, initial: 'signin' })
+
+block page-js
+	script.
+		jQuery(function($) {
+			$('.auth-form').find('.form-control').eq(0).focus().select();
+		});

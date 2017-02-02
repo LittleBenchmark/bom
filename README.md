@@ -5,3 +5,8 @@ This BOM app should be handy for Open Hardware hackers and makers. The goal is t
 # More Goals
 
 - Retrieve part details based on a URL that's input automatically so that you don't have to enter part data.
+
+
+# Resources
+
+- [Keystone Starter Kit](https://github.com/robksawyer/keystone-starter-kit)
