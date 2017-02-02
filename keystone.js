@@ -19,7 +19,7 @@ var mongo_url = process.env.MONGO_URI;
 
 if (process.env.ENVIRONMENT === 'local' && process.env.USE_LIVE_DB === 'true') {
 	mongo_url = process.env.MONGO_URI;
-} else {
+} else if(process.env.ENVIRONMENT === 'local'){
 	mongo_url = 'mongodb://localhost/' + pkg.name;
 }
 
