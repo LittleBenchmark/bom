@@ -11,9 +11,7 @@ var deps = {
 	mentoring: { 'mentoring.available': true },
 
 	github: { 'services.github.isConfigured': true },
-	facebook: { 'services.facebook.isConfigured': true },
-	google: { 'services.google.isConfigured': true },
-	twitter: { 'services.twitter.isConfigured': true }
+	google: { 'services.google.isConfigured': true }
 };
 
 User.add({
@@ -44,17 +42,6 @@ User.add({
 			accessToken: { type: String, label: 'Access Token', dependsOn: deps.github },
 			refreshToken: { type: String, label: 'Refresh Token', dependsOn: deps.github }
 		},
-		facebook: {
-			isConfigured: { type: Boolean, label: 'Facebook has been authenticated' },
-
-			profileId: { type: String, label: 'Profile ID', dependsOn: deps.facebook },
-
-			username: { type: String, label: 'Username', dependsOn: deps.facebook },
-			avatar: { type: String, label: 'Image', dependsOn: deps.facebook },
-
-			accessToken: { type: String, label: 'Access Token', dependsOn: deps.facebook },
-			refreshToken: { type: String, label: 'Refresh Token', dependsOn: deps.facebook }
-		},
 		google: {
 			isConfigured: { type: Boolean, label: 'Google has been authenticated' },
 
@@ -65,17 +52,6 @@ User.add({
 
 			accessToken: { type: String, label: 'Access Token', dependsOn: deps.google },
 			refreshToken: { type: String, label: 'Refresh Token', dependsOn: deps.google }
-		},
-		twitter: {
-			isConfigured: { type: Boolean, label: 'Twitter has been authenticated' },
-
-			profileId: { type: String, label: 'Profile ID', dependsOn: deps.twitter },
-
-			username: { type: String, label: 'Username', dependsOn: deps.twitter },
-			avatar: { type: String, label: 'Image', dependsOn: deps.twitter },
-
-			accessToken: { type: String, label: 'Access Token', dependsOn: deps.twitter },
-			refreshToken: { type: String, label: 'Refresh Token', dependsOn: deps.twitter }
 		}
 	}
 });
