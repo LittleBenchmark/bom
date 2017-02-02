@@ -18,8 +18,6 @@ exports = module.exports = function (req, res) {
 	locals.data = {
 	};
 
-	console.log(req);
-
 	locals.formData = req.body || {};
 
 	// var User = keystone.list(keystone.get('user model'));

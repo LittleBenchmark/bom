@@ -53,8 +53,6 @@ exports = module.exports = function (app) {
 	// Views
 	app.get('/', routes.views.index);
 	//
-	app.get('/dashboard', routes.views.userDashboard);
-	//
 	app.get('/blog/:category?', routes.views.blog);
 	app.get('/blog/post/:post', routes.views.post);
 	app.all('/contact', routes.views.contact);
@@ -63,6 +61,9 @@ exports = module.exports = function (app) {
 	app.get('/bom/:bom', routes.views.bom);
 	app.get('/bom/parts/:part', routes.views.bom_part);
 	app.get('/bom/parts/:category?', routes.views.bom_parts);
+
+	app.get('/parts/search', routes.views.parts.search);
+	app.post('/parts/search/:part?', routes.views.parts.search);
 
 	// Session
 	app.all('/join', routes.views.session.join);

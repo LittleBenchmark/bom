@@ -22,8 +22,15 @@
     "eslint-config-keystone": "^2.3.1",
     "eslint-plugin-react": "^5.1.1",
     "gulp": "^3.7.0",
+    "gulp-cssmin": "^0.1.7",
+    "gulp-less": "^3.3.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-pug": "^3.2.0",
+    "gulp-rename": "^1.2.2",
     "gulp-shell": "^0.5.0",
-    "gulp-watch": "^4.3.5"
+    "gulp-watch": "^4.3.5",
+    "path": "^0.12.7",
+    "pug-lint": "^2.4.0"
   },
   "scripts": {
     "lint": "eslint .",
