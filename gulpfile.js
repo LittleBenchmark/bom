@@ -6,6 +6,7 @@ var gulp = require('gulp'),
 		less = require('gulp-less'),
 		plumber = require('gulp-plumber'),
 		cssmin = require('gulp-cssmin'),
+		ignore = require('gulp-ignore'),
 		rename = require('gulp-rename');
 
 var paths = {
@@ -25,7 +26,21 @@ gulp.task('watch', function () {
 });
 
 gulp.task('less', function () {
-	gulp.src('./public/styles/*.less', '!./public/styles/bootstrap/**', '!./public/styles/site.less', '!./public/styles/themes/**')
+
+	var bootstrap_dir = '';
+	gulp.src([
+			'!public/styles/bootstrap/**',
+			'!public/styles/themes/**',
+			'!public/styles/site.less',
+			'!public/styles/components/buttons.less',
+			'!public/styles/site/entypo.less',
+			'!public/styles/site/mixins.less',
+			'!public/styles/site/layout.less',
+			'!public/styles/site/session.less',
+			'!public/styles/site/variables.less',
+			'public/styles/components/*.less',
+			'public/styles/site/*.less'
+		])
 		.pipe(plumber())
 		.pipe(less())
 		.pipe(gulp.dest('./public/styles/'))
@@ -33,8 +48,9 @@ gulp.task('less', function () {
 		.pipe(rename({
 			suffix: '.min'
 		}))
+		.pipe(plumber.stop())
 		.pipe(gulp.dest('./public/styles/'));
 });
 
 
-gulp.task('default', ['less', 'watch', 'runKeystone']);
+gulp.task('default', ['less', 'runKeystone', 'watch']);
