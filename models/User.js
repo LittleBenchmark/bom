@@ -9,31 +9,28 @@ var User = new keystone.List('User');
 
 User.add({
 	name: { type: Types.Name, required: true, index: true },
-	group: { type: Types.Select, options: 'user, editor, admin', default: 'user' },
+	group: { type: Types.Select, options: 'user, moderator, admin', default: 'user' },
 	email: { type: Types.Email, initial: true, required: true, index: true },
 	password: { type: Types.Password, initial: true, required: true },
+	resetPasswordKey: { type: String, hidden: true }
 },
 'Permissions', {
 	isAdmin: {
 		type: Boolean,
-		label: 'Admins',
-		index: true
-	},
-	isUser: {
-		type: Boolean,
-		label: 'Public Users',
-		index: true
-	},
-	isEditor: {
-		type: Boolean,
-		label: 'Public Editors',
+		label: 'Can access admin area',
 		index: true
 	}
 });
 
 // Provide access to Keystone
 User.schema.virtual('canAccessKeystone').get(function () {
-	return this.isAdmin;
+	if (this.isAdmin) {
+  	return true;
+  } else if (this.group === 'moderator'){
+  	return true;
+  } else {
+  	return false;
+  }
 });
 
 

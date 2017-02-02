@@ -26,7 +26,7 @@ Part.add({
 		options: 'Lead free, Contains Lead',
 		label: 'Lead Free Status',
 		default: 'Lead free',
-		index: true 
+		index: true
 	},
 	msl: {
 		type: Types.Select,
@@ -44,6 +44,8 @@ Part.add({
 	categories: { type: Types.Relationship, ref: 'PartCategory', many: true },
 	subcategories: { type: Types.Relationship, ref: 'PartSubcategory', many: true }
 });
+
+Part.relationship({ ref: 'BOMPart', path: 'part' });
 
 Part.defaultColumns = 'title, number|20%, createdBy|20%, state|20%';
 

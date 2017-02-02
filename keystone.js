@@ -115,6 +115,14 @@ keystone.set('nav', {
 	users: 'users',
 });
 
+// Configure a route for normal users after signin.
+// Keeps them from being dumped into the Keystone Admin area.
+// See https://github.com/keystonejs/keystone/issues/1489
+keystone.set('signin redirect', function(user, req, res){
+  var url = (user.isAdmin) ? '/keystone' : '/dashboard';
+  res.redirect(url);
+});
+
 // Start Keystone to connect to your database and initialise the web server
 
 keystone.start();

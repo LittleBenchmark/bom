@@ -2,7 +2,7 @@ extends ../layouts/default
 
 block content
 	.container: .jumbotron
-		h1 Welcome!
+		h1 Welcome to Little B.O.M!
 		p Go ahead, start creating a bill of materials and share it as you wish. It's really that simple.
 		p If you need more info, visit the <a href='/guide'>Getting Started</a> guide.
 		hr
@@ -10,15 +10,12 @@ block content
 			p
 				a(href='/keystone').btn.btn-lg.btn-primary Open the Admin UI
 		else
-			p We have created a default Admin user for you with the email <strong>rob@littlebenchmark.com</strong> and the password <strong>admin</strong>.
 			p
-				a(href='/keystone/signin', style='margin-right: 10px').btn.btn-lg.btn-primary Sign in
-				|  to use the Admin UI.
+				a(href='/signup', style='margin-right: 10px').btn.btn-lg.btn-primary Sign up
+				|  to make a Bill of Materials list.
 		hr
-		p Remember to <a href='https://github.com/LittleBenchmark/bom' target='_blank'>Star Little Benchmark B.O.M on GitHub</a> and
+		p Remember to <a href='https://github.com/LittleBenchmark/bom' target='_blank'>Star Little B.O.M on GitHub</a> and
 			| <a href='https://twitter.com/littlebenchmark' target='_blank'>follow @littlebenchmark</a> on twitter for updates.
 
 
 block js
-	script(type='text/javascript').
-		console.log(section)
