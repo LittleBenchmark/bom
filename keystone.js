@@ -17,10 +17,12 @@ var pkg = require('./package.json');
 
 var mongo_url = process.env.MONGO_URI;
 
-if (process.env.ENVIRONMENT === 'local' && process.env.USE_LIVE_DB === 'true') {
-	mongo_url = process.env.MONGO_URI;
-} else if(process.env.ENVIRONMENT === 'local'){
-	mongo_url = 'mongodb://localhost/' + pkg.name;
+if (process.env.ENVIRONMENT === 'local') {
+	if(process.env.USE_LIVE_DB === 'true') {
+		mongo_url = process.env.MONGO_URI;
+	} else {
+		mongo_url = 'mongodb://localhost/' + pkg.name;
+	}
 }
 
 keystone.init({
