@@ -73,9 +73,6 @@ keystone.init({
 	},
 
 	'embedly api key': process.env.EMBEDLY_API_KEY,
-
-	'chartbeat property': process.env.CHARTBEAT_PROPERTY,
-	'chartbeat domain': process.env.CHARTBEAT_DOMAIN
 });
 
 // Load your project's Models
@@ -114,6 +111,13 @@ keystone.set('email locals', {
 // Load your project's email test routes
 keystone.set('email tests', require('./routes/emails'));
 
+keystone.set('hostName',
+	(function() {
+		if (keystone.get('env') === 'staging') return 'https://little-benchmark-bom.herokuapp.com/';
+		if (keystone.get('env') === 'production') return 'http://bom.littlebenchmark.com';
+		return 'http://localhost:' + (keystone.get('port') || '3000');
+	})()
+);
 
 // Configure the navigation bar in Keystone's Admin UI
 keystone.set('nav', {
