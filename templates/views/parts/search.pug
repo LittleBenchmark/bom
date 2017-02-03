@@ -27,14 +27,37 @@ block content
 								button(type='submit')
 									span.glyphicon.glyphicon-search
 						small#searchHelp.form-text.text-muted Try something like
-							strong  MSP430
+							strong  SN74S74N
 
 	.container
 		.row
-			if data
-				if data.json
-					if data.json[0]
-						pre#searchResults= JSON.stringify(JSON.parse(data.json)[0], null, 2)
+			p Found a total of <strong>#{matches}</strong> matches.
+
+	if data
+		if matches > 0
+			- var results = JSON.parse(data.json).items
+			.container.results
+				.row
+					each item, index in results
+						div.card-deck
+							if item
+								div.card
+									img.card-img-top(src="",alt="")
+									div.card-block
+										h4.card-title= item.mpn
+											i.fa.fa-external-link(aria-hidden='true',style="padding-left: 2px")
+										- var url1 = item.brand.homepage_url
+										p.card-text
+											a(href=url1, target="_blank")
+										- var url2 = item.octopart_url
+										p.card-text
+											a(href=url2, target="_blank") #{item.brand.name}
+
+			.container.code-results
+				.row
+					each item, index in results
+						if item
+							pre#searchResults= JSON.stringify(item, null, 2)
 
 block js
 	script.

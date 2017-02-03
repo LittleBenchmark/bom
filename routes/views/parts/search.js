@@ -47,23 +47,23 @@ exports = module.exports = function (req, res) {
 
 		var encodedQuery = urlencode(locals.formData.query);
 		var queries = [{
-			q: encodedQuery,
-			mpn: encodedQuery,
-			limit: 2,
-		}];
+				mpn: encodedQuery,
+				limit: 2,
+			}, {
+				q: encodedQuery + '*',
+				limit: 2,
+			}];
 
-		cli.partsMatch({ queries: queries, exact_only: false }, function (err, res) {
-			// console.log(res.request);
+		cli.partsMatch({
+			queries: queries,
+			exact_only: false,
+			include: ['datasheets','imagesets'],
+		}, {}, function (err, res) {
 			// console.log('---');
 			// console.log(res.results[0].items);
 			if (!err) {
 				locals.matches = res.results[0].hits;
-				// var safe = JSON.stringify(res.results[0].items);
-				locals.data.json = JSON.stringify(res.results[0].items);
-				locals.data.html = [];
-				for (var i = 0; i < queries.limit; i++) {
-					locals.data.html[i] = syntaxHighlight(JSON.stringify(res.results[0].items[i], null, 4));
-				}
+				locals.data.json = JSON.stringify(res.results[0]);
 			} else {
 				console.log(err);
 			}
