@@ -1,5 +1,10 @@
 var keystone = require('keystone');
-var async = require('async');
+var request = require('request');
+var urlencode = require('urlencode');
+var octo = require('node-octo');
+
+// See https://www.npmjs.com/package/request-debug
+require('request-debug')(request);
 
 exports = module.exports = function (req, res) {
 
@@ -8,20 +13,23 @@ exports = module.exports = function (req, res) {
 
 	// Init locals
 	locals.section = 'parts-search';
-	locals.filters = {
-
-	};
+	locals.filters = {};
+	locals.matches = 0;
 	locals.data = {
-		results: []
+		json: {},
+		html: {},
 	};
 
 	locals.formData = req.body || {};
 
-	locals.opApiKey = process.env.OCTOPART_API_KEY;
+	// See https://www.npmjs.com/package/node-octo
+	// locals.opApiKey = process.env.OCTOPART_API_KEY;
+	var cli = octo.createV3(process.env.OCTOPART_API_KEY);
 
 	view.on('init', function (next) {
 
-		console.log('HERE VIEW');
+		// Add code for the view
+
 		// var q = keystone.list('BOMPart').model.findOne({
 		// 	state: 'published',
 		// 	slug: locals.filters.part,
@@ -34,19 +42,55 @@ exports = module.exports = function (req, res) {
 		next();
 	});
 
-	view.on('post', { action: 'part.search' }, function(next){
+	view.on('post', { action: 'part.search' }, function (next) {
+		// Add code for the POST action
 
-		console.log('HERE POST');
-		console.log(locals.formData.query);
+		var encodedQuery = urlencode(locals.formData.query);
+		var queries = [{
+			q: encodedQuery,
+			mpn: encodedQuery,
+			limit: 2,
+		}];
 
-		var url = 'http://octopart.com/api/v3/parts/match?';
-				url += '&queries=[{"mpn":'+locals.formData.query+'}]';
-				url += '&apikey=' + locals.opApiKey;
-				url += '&callback=?';
-		
+		cli.partsMatch({ queries: queries, exact_only: false }, function (err, res) {
+			// console.log(res.request);
+			// console.log('---');
+			// console.log(res.results[0].items);
+			if (!err) {
+				locals.matches = res.results[0].hits;
+				// var safe = JSON.stringify(res.results[0].items);
+				locals.data.json = JSON.stringify(res.results[0].items);
+				locals.data.html = [];
+				for (var i = 0; i < queries.limit; i++) {
+					locals.data.html[i] = syntaxHighlight(JSON.stringify(res.results[0].items[i], null, 4));
+				}
+			} else {
+				console.log(err);
+			}
+			next();
+		});
 
+		// var url = 'http://octopart.com/api/v3/parts/match?';
+		// 		url += '&queries=' + queries;
+		// 		url += '&apikey=' + locals.opApiKey;
+		// 		url += '&callback=?';
 
-		next();
+		// request.get({ url: url, json: true}, function(err, res, body){
+		// 	if (!error && response.statusCode === 200) {
+		// 		console.log(typeof(res));
+		// 		// res.forEach(function(item){
+		// 		// 	console.log(item);
+		// 		// 	console.log('      ');
+		// 		// 	console.log('=====================');
+		// 		// 	console.log('      ');
+		// 		// 	locals.data.results = JSON.parse(item);
+		// 		// });
+		// 	} else {
+		// 		console.log('Status Code: ' + res.statusCode);
+		// 		console.log('Error: ');
+		// 		console.log(err);
+		// 	}
+		// });
 	});
 
 	// Render the view

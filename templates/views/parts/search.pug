@@ -9,19 +9,57 @@ block intro
 
 block content
 	.container
-		if results
-			p Show the results now.
-		else
-			.container
-				.row
-					.col-sm-6.col-sm-offset-3
-						#imaginary_container
-							form.contact-form(method="post")
-								input(type='hidden', name='action', value='part.search')
-								.input-group.stylish-input-group
-									input.form-control(type='text', name='query', placeholder='Search by part number or keyword', aria-describedby='search')
-									|
-									span.input-group-addon
-										button(type='submit')
-											span.glyphicon.glyphicon-search
-								small#searchHelp.form-text.text-muted Try something like <strong>MSP430</strong>
+		.row
+			if formData.query
+				p You searched for
+					strong  #{formData.query}.
+
+	.container
+		.row
+			.col-sm-6.col-sm-offset-3
+				#imaginary_container
+					form.contact-form(method="post")
+						input(type='hidden', name='action', value='part.search')
+						.input-group.stylish-input-group
+							input.form-control(type='text', name='query', placeholder='Search by part number or keyword', aria-describedby='search')
+							|
+							span.input-group-addon
+								button(type='submit')
+									span.glyphicon.glyphicon-search
+						small#searchHelp.form-text.text-muted Try something like
+							strong  MSP430
+
+	.container
+		.row
+			if data
+				if data.json
+					if data.json[0]
+						pre#searchResults= JSON.stringify(JSON.parse(data.json)[0], null, 2)
+
+block js
+	script.
+		if ($('#searchResults').length > 0){
+			$('#searchResults').html(syntaxHighlight($('#searchResults').text()));
+		}
+
+		function syntaxHighlight (json) {
+			if (typeof json !== 'string') {
+				json = JSON.stringify(json, undefined, 2);
+			}
+			json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+			return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+				var cls = 'number';
+				if (/^"/.test(match)) {
+					if (/:$/.test(match)) {
+						cls = 'key';
+					} else {
+						cls = 'string';
+					}
+				} else if (/true|false/.test(match)) {
+					cls = 'boolean';
+				} else if (/null/.test(match)) {
+					cls = 'null';
+				}
+				return '<span class="' + cls + '">' + match + '</span>';
+			});
+		}

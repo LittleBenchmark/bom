@@ -39,6 +39,8 @@ keystone.init({
 	'views': 'templates/views',
 	'view engine': 'pug',
 
+	'logger': ':method :url :status :response-time ms',
+
 	'emails': 'templates/emails',
 	'email transport': 'mailgun',
 	'contactEmailAddress': 'team@littlebenchmark.com',
