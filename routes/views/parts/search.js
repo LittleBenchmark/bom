@@ -2,11 +2,12 @@ var keystone = require('keystone');
 var request = require('request');
 var urlencode = require('urlencode');
 var octo = require('node-octo');
+var octopart = require('octopart');
 
 // See https://www.npmjs.com/package/request-debug
 require('request-debug')(request);
 
-exports = module.exports = function (req, res) {
+exports = module.exports = function(req, res) {
 
 	var view = new keystone.View(req, res);
 	var locals = res.locals;
@@ -17,7 +18,7 @@ exports = module.exports = function (req, res) {
 	locals.matches = 0;
 	locals.data = {
 		json: {},
-		html: {},
+		html: {}
 	};
 
 	locals.formData = req.body || {};
@@ -26,7 +27,7 @@ exports = module.exports = function (req, res) {
 	// locals.opApiKey = process.env.OCTOPART_API_KEY;
 	var cli = octo.createV3(process.env.OCTOPART_API_KEY);
 
-	view.on('init', function (next) {
+	view.on('init', function(next) {
 
 		// Add code for the view
 
@@ -42,23 +43,23 @@ exports = module.exports = function (req, res) {
 		next();
 	});
 
-	view.on('post', { action: 'part.search' }, function (next) {
+	view.on('post', { action: 'part.search' }, function(next) {
 		// Add code for the POST action
 
 		var encodedQuery = urlencode(locals.formData.query);
 		var queries = [{
-				mpn: encodedQuery,
-				limit: 2,
-			}, {
-				q: encodedQuery + '*',
-				limit: 2,
-			}];
+			mpn: encodedQuery,
+			limit: 2
+		}, {
+			q: encodedQuery + '*',
+			limit: 2
+		}];
 
 		cli.partsMatch({
 			queries: queries,
 			exact_only: false,
-			include: ['datasheets','imagesets'],
-		}, {}, function (err, res) {
+			include: ['datasheets', 'imagesets']
+		}, {}, function(err, res) {
 			// console.log('---');
 			// console.log(res.results[0].items);
 			if (!err) {

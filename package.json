@@ -12,6 +12,7 @@
     "morgan": "^1.7.0",
     "newrelic": "^1.36.2",
     "node-octo": "https://github.com/robksawyer/octo/tarball/42941bd2e6e71d9c44d9420f9ed67d73e3c30f5d",
+    "octopart": "^0.1.1",
     "passport": "0.3.2",
     "passport-facebook": "2.1.0",
     "passport-github": "1.1.0",
