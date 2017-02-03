@@ -2,7 +2,6 @@ var keystone = require('keystone');
 var request = require('request');
 var urlencode = require('urlencode');
 var octo = require('node-octo');
-var octopart = require('octopart');
 
 // See https://www.npmjs.com/package/request-debug
 require('request-debug')(request);
