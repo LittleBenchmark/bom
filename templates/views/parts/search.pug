@@ -57,12 +57,14 @@ block content
 				.row
 					each item, index in results
 						if item
-							pre#searchResults= JSON.stringify(item, null, 2)
+							pre(id='#searchResults'+'-'+index,class="searchResults")= JSON.stringify(item, null, 2)
 
 block js
 	script.
-		if ($('#searchResults').length > 0){
-			$('#searchResults').html(syntaxHighlight($('#searchResults').text()));
+		if ($('.searchResults').length > 0){
+			$('.searchResults').each(function(index, item){
+				$(item).html(syntaxHighlight($(item).text()));
+			});
 		}
 
 		function syntaxHighlight (json) {

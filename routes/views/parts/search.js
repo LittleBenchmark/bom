@@ -69,28 +69,6 @@ exports = module.exports = function (req, res) {
 			}
 			next();
 		});
-
-		// var url = 'http://octopart.com/api/v3/parts/match?';
-		// 		url += '&queries=' + queries;
-		// 		url += '&apikey=' + locals.opApiKey;
-		// 		url += '&callback=?';
-
-		// request.get({ url: url, json: true}, function(err, res, body){
-		// 	if (!error && response.statusCode === 200) {
-		// 		console.log(typeof(res));
-		// 		// res.forEach(function(item){
-		// 		// 	console.log(item);
-		// 		// 	console.log('      ');
-		// 		// 	console.log('=====================');
-		// 		// 	console.log('      ');
-		// 		// 	locals.data.results = JSON.parse(item);
-		// 		// });
-		// 	} else {
-		// 		console.log('Status Code: ' + res.statusCode);
-		// 		console.log('Error: ');
-		// 		console.log(err);
-		// 	}
-		// });
 	});
 
 	// Render the view
