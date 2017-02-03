@@ -20,6 +20,7 @@ block content
 				#imaginary_container
 					form.contact-form(method="post")
 						input(type='hidden', name='action', value='part.search')
+						input(type='hidden', name='limit', value='5')
 						.input-group.stylish-input-group
 							input.form-control(type='text', name='query', placeholder='Search by part number or keyword', aria-describedby='search')
 							|
@@ -38,26 +39,54 @@ block content
 			- var results = JSON.parse(data.json).items
 			.container.results
 				.row
-					each item, index in results
-						div.card-deck
-							if item
-								div.card
-									img.card-img-top(src="",alt="")
-									div.card-block
-										h4.card-title= item.mpn
-											i.fa.fa-external-link(aria-hidden='true',style="padding-left: 2px")
-										- var url1 = item.brand.homepage_url
-										p.card-text
-											a(href=url1, target="_blank")
-										- var url2 = item.octopart_url
-										p.card-text
-											a(href=url2, target="_blank") #{item.brand.name}
+					div.panel.panel-default
+						h3.panel-heading Search Results
+						table.table
+							thead
+								tr
+									th #
+									th
+										i.fa.fa-picture-o(aria-hidden="true")
+									th Manufacturer Part Number (MPN)
+									th Manufacturer
+									th Datasheet
+									th
+										i.fa.fa-cog.brand-octopart(aria-hidden="true") Octopart
+							tbody
+								each item, index in results
+									if item
+										tr
+											th(scope="row")= index+1
+											td
+												if item.imagesets[0]
+													- var imgUrl1 = item.imagesets[0].medium_image.url
+													- var alt1 = item.imagesets[0].credit_string;
+													img(src=imgUrl1, alt=alt1, width='60')
+												else
+													img.media-object(src='/images/microchip-trans-40.png', alt='default image',  width='60')
+											td= item.mpn
+													i.fa.fa-external-link(aria-hidden='true',style="padding-left: 2px")
+											td
+												- var urlBrand = item.brand.homepage_url
+												a(href=urlBrand, target="_blank") #{item.brand.name}
+											td
+												//Find the first PDF
+												each datasheet, index in item.datasheets
+													- if (datasheet.mimetype === 'application/pdf')
+														- var urlDatasheet = datasheet.url
+														a(href=urlDatasheet, target="_blank")
+															i.fa.fa-file-pdf-o(aria-hidden='true', style="padding-right: 3px")
+															span Datasheet at #{datasheet.attribution.sources[0].name}
+														- break;
+											td
+												- var urlOctopart = item.octopart_url
+												a(href=urlOctopart, target="_blank") More Info
 
-			.container.code-results
-				.row
-					each item, index in results
-						if item
-							pre(id='#searchResults'+'-'+index,class="searchResults")= JSON.stringify(item, null, 2)
+			//- .container.code-results
+			//- 	.row
+			//- 		each item, index in results
+			//- 			if item
+			//- 				pre(id='#searchResults'+'-'+index,class="searchResults")= JSON.stringify(item, null, 2)
 
 block js
 	script.

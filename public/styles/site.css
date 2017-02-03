@@ -6770,6 +6770,24 @@ button.close {
     display: none !important;
   }
 }
+.brand-facebook {
+  color: #3b5997;
+}
+.brand-twitter {
+  color: #00abec;
+}
+.brand-github {
+  color: #333;
+}
+.brand-google {
+  color: #3988e5;
+}
+.brand-hover-bg {
+  color: aliceblue;
+}
+.brand-octopart {
+  color: #0d52a1;
+}
 .navbar-default .badge {
   background-color: #fff;
   color: #fff;

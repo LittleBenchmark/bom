@@ -5,6 +5,16 @@
       "no-dupe-keys": "warn",
       "space-before-function-paren": ["error", "never"],
       "comma-dangle": ["error", "never"],
-      "no-unused-vars": [WARN, "all"]
+      "no-unused-vars": [WARN, "all"],
+      "keyword-spacing": ["warn", {
+        "before": false,
+        "after": false,
+        "overrides": {
+          "else": {
+            "before": true,
+            "after": true
+          }
+        }
+      }]
     }
 }

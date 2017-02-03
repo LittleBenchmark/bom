@@ -46,12 +46,16 @@ exports = module.exports = function(req, res) {
 		// Add code for the POST action
 
 		var encodedQuery = urlencode(locals.formData.query);
+		var limit = parseInt(locals.formData.limit);
+		if(limit > 15) {
+			limit = 15;
+		}
 		var queries = [{
 			mpn: encodedQuery,
-			limit: 2
+			limit: locals.formData.limit
 		}, {
 			q: encodedQuery + '*',
-			limit: 2
+			limit: locals.formData.limit
 		}];
 
 		cli.partsMatch({
@@ -61,7 +65,7 @@ exports = module.exports = function(req, res) {
 		}, {}, function(err, res) {
 			// console.log('---');
 			// console.log(res.results[0].items);
-			if (!err) {
+			if(!err) {
 				locals.matches = res.results[0].hits;
 				locals.data.json = JSON.stringify(res.results[0]);
 			} else {
